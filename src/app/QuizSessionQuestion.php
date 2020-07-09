@@ -11,7 +11,7 @@ class QuizSessionQuestion extends Model
      *
      * @var string
      */
-    protected $table = 'quiz_session_question';
+    protected $table = 'quiz_session_questions';
 
     /**
      * The attributes that are mass assignable.
@@ -43,7 +43,7 @@ class QuizSessionQuestion extends Model
     /**
      * The questions relationship
      */
-    public function questions() {
+    public function question() {
         return $this->belongsTo('App\Question')
             ->with('answers');
     }
@@ -68,9 +68,9 @@ class QuizSessionQuestion extends Model
      * @return string
      */
     public function getStateAttribute() {
-        // question ready to be answered
-        if ($this->time_limit > time() && empty($this->answer)) {
-            return 'ACTIVE';
+        // inactive if not time limit is set yet
+        if (empty($this->time_limit)) {
+            return 'INACTIVE';
         }
 
         // question answered correctly
@@ -78,13 +78,18 @@ class QuizSessionQuestion extends Model
             return 'ANSWER_CORRECT';
         }
 
-        // question answered wrongly
+        // question answered correctly
         if (isset($this->answer) && !$this->answer->is_correct) {
             return 'ANSWER_WRONG';
         }
 
-        // question hasn't started yet
-        return 'INACTIVE';
+        // question ready to be answered
+        if (\Carbon\Carbon::parse($this->time_limit) > \Carbon\Carbon::now()) {
+            return 'ACTIVE';
+        }
+
+        // question is empty and not active
+        return 'ANSWER_WRONG';
     }
 
 }

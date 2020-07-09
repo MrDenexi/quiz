@@ -41,6 +41,15 @@ class Quiz extends Model
     ];
 
     /**
+     * Quiz sessions relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function quizSessions() {
+        return $this->hasMany('App\QuizSession');
+    }
+
+    /**
      * The questions relationship
      */
     public function questions() {

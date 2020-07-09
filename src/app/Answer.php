@@ -39,4 +39,13 @@ class Answer extends Model
     protected $casts = [
         'is_correct' => 'boolean'
     ];
+
+    /**
+     * The question relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function question() {
+        return $this->belongsTo('App\Answer');
+    }
 }

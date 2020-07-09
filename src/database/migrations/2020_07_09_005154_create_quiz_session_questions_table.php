@@ -17,9 +17,9 @@ class CreateQuizSessionQuestionsTable extends Migration
             $table->id();
             $table->foreignId('quiz_session_id')->constrained('quiz_sessions');
             $table->foreignId('question_id')->constrained('questions');
-            $table->integer('order');
-            $table->dateTime('time_limit');
-            $table->foreignId('answer_id')->constrained('answers');
+            $table->integer('order')->nullable();
+            $table->dateTime('time_limit')->nullable();
+            $table->foreignId('answer_id')->nullable()->constrained('answers');
             $table->timestamps();
 
             $table->unique(['quiz_session_id', 'question_id']);

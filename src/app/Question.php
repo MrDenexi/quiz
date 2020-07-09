@@ -41,8 +41,6 @@ class Question extends Model
         //
     ];
 
-
-
     /**
      * The answers relationship
      *
@@ -50,5 +48,14 @@ class Question extends Model
      */
     public function answers() {
         return $this->hasMany('App\Answer');
+    }
+
+    /**
+     * The answers for the question, but shuffled
+     *
+     * @return Collection
+     */
+    public function shuffledAnswers() {
+        return $this->answers->shuffle();
     }
 }
