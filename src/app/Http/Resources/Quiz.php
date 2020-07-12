@@ -20,7 +20,7 @@ class Quiz extends JsonResource
                 'name' => $this->name,
             ],
             'links' => [
-                'self' => action('QuizController@show', ['id' => $request->id, 'token' => $request->token]),
+                'self' => action('QuizController@show', ['id' => $this->id, 'token' => $request->token]),
             ],
         ];
     }

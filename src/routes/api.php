@@ -18,8 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/quizzes', 'QuizController@index')->name('quiz.index');
-Route::get('/quizzes/{id}/{token?}', 'QuizController@show')->name('quiz.show');
+Route::get('/quiz', 'QuizController@index')->name('quiz.index');
+Route::get('/quiz/{id}/{token?}', 'QuizController@show')->name('quiz.show');
 
 Route::patch('/session-question/{id}', 'QuizController@submitAnswer')->name('quiz.submitAnswer');
 

@@ -18,7 +18,7 @@ class QuizController extends Controller
      */
     public function index()
     {
-        return QuizResource::collection(\App\Quiz::query()->paginate());
+        return QuizResource::collection(\App\Quiz::all());
     }
 
     /**
