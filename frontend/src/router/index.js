@@ -1,11 +1,23 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+
+import Quiz from '../views/Quiz.vue'
 
 const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Quiz
+  },
+  {
+    path: '/quiz',
+    name: 'Quiz',
+    component: Quiz
+  },
+  {
+    path: '/quiz/:id',
+    name: 'QuizSession',
+    component: () => import(/* webpackChunkName: "quiz-session" */ '@/components/QuizSession.vue'),
+    props: true
   },
   {
     path: '/about',
